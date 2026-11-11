@@ -21,7 +21,7 @@ def index():
 
 @app.route("/health")
 def health():
-    return jsonify(status="ko"), 200
+    return jsonify(status="ok"), 200
 
 
 @app.route("/ready")
