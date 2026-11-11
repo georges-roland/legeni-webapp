@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 APP_VERSION = os.environ.get("APP_VERSION", "1.0.0")
 APP_ENV = os.environ.get("APP_ENV", "dev")
-APP_COLOR = os.environ.get("APP_COLOR", "#1f6feb")
+APP_COLOR = os.environ.get("APP_COLOR", "#8250df")
 
 
 @app.route("/")
