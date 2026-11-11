@@ -1,4 +1,4 @@
-// Pipeline de référence du TP 3.5 : tests -> build -> test d'acceptance -> push
+// Pipeline TP 3.6 : Multibranch (tests -> build -> acceptance -> push sur main uniquement)
 pipeline {
     agent any
 
@@ -9,7 +9,7 @@ pipeline {
 
     environment {
         IMAGE          = "${params.DOCKERHUB_ID}/legeni-webapp"
-        VERSION        = "1.0.${env.BUILD_NUMBER}"
+        VERSION        = "${env.BRANCH_NAME == 'main' ? '1.0.' + env.BUILD_NUMBER : (env.BRANCH_NAME ?: 'local').replaceAll('[^a-zA-Z0-9.-]', '-') + '-' + env.BUILD_NUMBER}"
         TEST_CONTAINER = "webapp-ci-${env.BUILD_NUMBER}"
         CI_NETWORK     = "ci-net-${env.BUILD_NUMBER}"
     }
@@ -47,7 +47,7 @@ pipeline {
         }
 
         stage('Push Docker Hub') {
-            when { expression { params.PUSH } }
+            when { branch 'main' }
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerhub',
                                                   usernameVariable: 'DH_USER',
