@@ -11,10 +11,10 @@ APP_COLOR = os.environ.get("APP_COLOR", "#1f6feb")
 @app.route("/")
 def index():
     html = (
-        f"^<html^>^<body style='background-color:{APP_COLOR};color:white;'^>"
-        f"^<h1^>Legeni Webapp – B3^</h1^>"
-        f"^<p^>Version {APP_VERSION} - Env: {APP_ENV}^</p^>"
-        f"^</body^>^</html^>"
+        f"<html><body style='background-color:{APP_COLOR};color:white;'>"
+        f"<h1>Legeni Webapp – B3</h1>"
+        f"<p>Version {APP_VERSION} - Env: {APP_ENV}</p>"
+        f"</body></html>"
     )
     return html, 200
 
